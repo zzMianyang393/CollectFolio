@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+import Faq from '../components/Faq.astro';
+import LegoIllustration from '../components/illustrations/LegoIllustration.astro';
+
+const faqs = [
+  {
+    q: 'Is LEGO a good investment?',
+    a: 'On average, sealed LEGO sets appreciate 11% annually after retirement, per a 2023 BrickPicker / Moscow State University study. Top performers (modular buildings, Star Wars UCS, Ideas sets) return 15-30%+. Used sets built and displayed typically do not appreciate — they hold or decline.',
+  },
+  {
+    q: 'Which LEGO sets are worth the most?',
+    a: 'Discontinued Star Wars Ultimate Collector Series (UCS), modular buildings (10182, 10197, 10218, etc.), and Ideas/CUUSCO sets. Recent examples: 75192 Millennium Falcon (retail $850, secondary $1,800+), 10294 Titanic (retail $680, secondary $1,100+).',
+  },
+  {
+    q: 'How does CollectFolio track LEGO values?',
+    a: 'We pull from BrickLink used/new sold, eBay sold listings, and Bricks & Minifigs marketplace data. Median sold across sources, updated weekly. Set number, theme, year, and piece count all auto-populate from the LEGO catalog.',
+  },
+  {
+    q: 'Should I track built sets vs sealed?',
+    a: 'Track them separately. Built and displayed sets with all pieces and original box have modest premium. Loose built sets without boxes typically depreciate. Sealed sets appreciate most reliably.',
+  },
+  {
+    q: 'What about minifigures?',
+    a: 'Rare and exclusive minifigures (Comic-Con exclusives, promos, limited polybags) tracked as separate line items. We aggregate prices from BrickLink minifigure marketplace and eBay sold.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Layout
+  title="LEGO Investment Tracker"
+  description="Track your LEGO collection value across sealed sets, built displays, and rare minifigures. Live BrickLink and eBay pricing, portfolio ROI, retirement alerts."
+  jsonLd={faqJsonLd}
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-6xl px-6 pt-20 pb-16 sm:pt-28 sm:pb-20">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <p class="text-sm font-medium uppercase tracking-wider text-fg-muted">
+          Sealed sets, built displays, rare minifigures
+        </p>
+        <h1 class="mt-6 text-4xl font-bold tracking-tight sm:text-6xl">
+          The LEGO investment tracker for collectors who treat sets like assets
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg text-fg-muted">
+          Stop guessing whether your sealed UCS sets are outpacing the S&P. CollectFolio pulls live BrickLink and eBay prices, tracks retirement dates, and shows real ROI per set.
+        </p>
+        <div class="mt-8">
+          <WaitlistForm source="lego-investment" buttonLabel="Notify me at launch" />
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <LegoIllustration class="w-full max-w-md" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      LEGO is a real asset class. It deserves a real ledger.
+    </h2>
+    <p class="mt-6 text-lg text-fg-muted">
+      A 2023 study of 2,300 retired LEGO sets found median annualized returns of 11%, with top performers exceeding 30%. Compare that to the S&P 500's ~10% and the appeal is obvious.
+    </p>
+    <p class="mt-4 text-lg text-fg-muted">
+      But "LEGO as investment" only works if you know what you own, what it cost, and what the market is paying today. Most collectors track this in a spreadsheet that goes stale the moment a set retires.
+    </p>
+  </section>
+
+  <!-- Features -->
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Built for LEGO collectors
+    </h2>
+
+    <div class="mt-12 grid gap-8 md:grid-cols-2">
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Set number lookup</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Type the set number (e.g., 10294, 75192). We auto-fill name, theme, year, piece count, and retail price.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Sealed vs built vs loose</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Track condition separately. A sealed 10179 Millennium Falcon commands $4,000+. A built one without the box: $700. Both are real prices you should know.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Retirement alerts</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          We watch the LEGO catalog for retirement announcements. The day a set retires, you get a notification — that's when secondary prices start moving.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Minifigure tracking</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Rare and exclusive minifigures (Comic-Con, promos, limited polybags) tracked as separate line items with their own price history.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Theme performance</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          See which themes are appreciating fastest: Star Wars UCS, modular buildings, Ideas, Technic, City. Your portfolio vs the index.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Storage & insurance</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          PDF inventory reports for insurance. Photo uploads for proof of condition. Replacement value calculations for collectors policies.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} heading="LEGO investment FAQ" />
+
+  <section id="waitlist" class="mx-auto max-w-3xl px-6 py-16 text-center">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      See if your collection is actually beating the market
+    </h2>
+    <p class="mt-4 text-lg text-fg-muted">
+      Beta opens Q3 2026. Join the waitlist for early access to the LEGO tracker.
+    </p>
+    <div class="mt-8">
+      <WaitlistForm source="lego-investment-bottom" />
+    </div>
+  </section>
+</Layout>

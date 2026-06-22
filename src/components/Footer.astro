@@ -1,0 +1,73 @@
+---
+const year = new Date().getFullYear();
+
+const productLinks = [
+  { href: '/pokemon-tracker', label: 'Card Tracker' },
+  { href: '/lego-investment', label: 'LEGO Tracker' },
+  { href: '/watch-collection', label: 'Watch Tracker' },
+  { href: '/vinyl-value', label: 'Vinyl Tracker' },
+  { href: '/insurance-valuation', label: 'Insurance Reports' },
+  { href: '/pricing', label: 'Pricing' },
+];
+
+const resourceLinks = [
+  { href: '/blog', label: 'Blog' },
+  { href: '/about', label: 'About' },
+];
+
+const legalLinks = [
+  { href: '/privacy', label: 'Privacy' },
+  { href: '/terms', label: 'Terms' },
+];
+---
+
+<footer class="mt-32 border-t border-border">
+  <div class="mx-auto max-w-6xl px-6 py-16">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="lg:col-span-1">
+        <a href="/" class="flex items-center gap-2 font-bold" aria-label="CollectFolio home">
+          <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true" class="text-accent">
+            <rect width="32" height="32" rx="6" fill="currentColor"/>
+            <path d="M8 11h16M8 16h12M8 21h8" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+          </svg>
+          <span>CollectFolio</span>
+        </a>
+        <p class="mt-4 max-w-xs text-sm text-fg-muted">
+          Cross-category collectibles portfolio management for serious collectors. Track value, returns, and insurance across every category you collect.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-semibold uppercase tracking-wider text-fg-muted">Product</h4>
+        <ul class="mt-4 space-y-3 text-sm">
+          {productLinks.map((link) => (
+            <li><a href={link.href} class="transition-colors hover:text-accent">{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-semibold uppercase tracking-wider text-fg-muted">Resources</h4>
+        <ul class="mt-4 space-y-3 text-sm">
+          {resourceLinks.map((link) => (
+            <li><a href={link.href} class="transition-colors hover:text-accent">{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-semibold uppercase tracking-wider text-fg-muted">Legal</h4>
+        <ul class="mt-4 space-y-3 text-sm">
+          {legalLinks.map((link) => (
+            <li><a href={link.href} class="transition-colors hover:text-accent">{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col items-start justify-between gap-4 border-t border-border pt-8 text-sm text-fg-muted sm:flex-row sm:items-center">
+      <div>© {year} CollectFolio. All rights reserved.</div>
+      <div>Made for collectors, by collectors.</div>
+    </div>
+  </div>
+</footer>

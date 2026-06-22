@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+import Faq from '../components/Faq.astro';
+import InsuranceIllustration from '../components/illustrations/InsuranceIllustration.astro';
+
+const faqs = [
+  {
+    q: 'Will my insurer accept a CollectFolio valuation report?',
+    a: 'Most major collectibles insurers — American Collectors Insurance, Collectibles Insurance Services, Hughey Insurance, and most specialist watch/jewelry insurers — accept market-aggregated valuations as a starting point. For high-value items ($25K+), they may still require a formal appraisal. We help with the supporting documentation either way.',
+  },
+  {
+    q: 'How often should I update my valuation?',
+    a: 'We recommend every 12 months for most collections, every 6 months for actively-traded categories (Pokemon cards, sealed LEGO), and immediately after major market moves. Our reports are timestamped so your insurer sees the freshness.',
+  },
+  {
+    q: 'What is included in the PDF report?',
+    a: 'Cover page with report ID and generation date. Per-category breakdowns: total items, total value, cost basis, unrealized gain. Item-level tables: name, category, condition, purchase price, current value, valuation source, valuation date. Photo evidence (when uploaded). Methodology disclosure.',
+  },
+  {
+    q: 'How do you determine "current value" for insurance?',
+    a: 'Replacement value at the median of recent sold listings across primary marketplaces. We do not use asking prices or optimistic outliers. Each item shows its source and date so your insurer can verify.',
+  },
+  {
+    q: 'Can I exclude items from the report?',
+    a: 'Yes. Each report is configurable: include or exclude per category, set value thresholds, and select date ranges. Useful for "high-value items only" reports.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Layout
+  title="Insurance Valuation for Collectibles"
+  description="Generate professional insurance valuation reports for your collectibles. Per-category breakdowns, item-level tables, photo evidence, methodology disclosure."
+  jsonLd={faqJsonLd}
+>
+  <section class="mx-auto max-w-6xl px-6 pt-20 pb-16 sm:pt-28 sm:pb-20">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <p class="text-sm font-medium uppercase tracking-wider text-fg-muted">
+          For collectors insuring $10K&ndash;$500K
+        </p>
+        <h1 class="mt-6 text-4xl font-bold tracking-tight sm:text-6xl">
+          Insurance valuation reports that your insurer will actually accept
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg text-fg-muted">
+          One-click PDF with every item, current market value, source, and date. Methodology disclosed. Per-category breakdowns. Photo evidence. Designed by collectors, for collectors insurers.
+        </p>
+        <div class="mt-8">
+          <WaitlistForm source="insurance-valuation" buttonLabel="Get notified" />
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <InsuranceIllustration class="w-full max-w-[14rem]" />
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Why insurance reports are a pain
+    </h2>
+    <p class="mt-6 text-lg text-fg-muted">
+      Most collectors underinsure. They submit a number &mdash; "$50,000 for my collection" &mdash; with no documentation, and that's the figure on the policy. After a loss, the insurer pays the documented number, not the inflated one.
+    </p>
+    <p class="mt-4 text-lg text-fg-muted">
+      Detailed valuations cost $500-$2,000 from a professional appraiser, take weeks, and go stale fast. Most collectors skip them. The result: underinsurance, or insurance that does not pay out what you expect.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      What CollectFolio generates
+    </h2>
+    <div class="mt-12 grid gap-8 md:grid-cols-2">
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Cover page with report ID</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Unique report ID, generation date, total valuation summary. The format insurers expect.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Per-category breakdowns</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Cards, LEGO, watches, vinyl each get their own page with subtotals. Easy for your insurer to cross-check.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Item-level tables</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Every item: name, category, condition, purchase price, current value, valuation source, valuation date.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Photo evidence</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Uploaded photos embedded in the report. Timestamps preserved (proves condition at valuation time).
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Methodology disclosure</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          We tell you exactly how each value was derived &mdash; which marketplace, which sold listing window, which aggregation method. No black boxes.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Re-generate anytime</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Updated valuations are a click away. We recommend refreshing every 6-12 months as markets move.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} heading="Insurance valuation FAQ" />
+
+  <section id="waitlist" class="mx-auto max-w-3xl px-6 py-16 text-center">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Insure what you actually own &mdash; at what it's actually worth
+    </h2>
+    <p class="mt-4 text-lg text-fg-muted">
+      Beta opens Q3 2026. Insurance reports are part of the Pro tier. Join the waitlist to lock in launch pricing.
+    </p>
+    <div class="mt-8">
+      <WaitlistForm source="insurance-valuation-bottom" />
+    </div>
+  </section>
+</Layout>

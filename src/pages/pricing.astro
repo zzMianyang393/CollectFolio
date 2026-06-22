@@ -1,0 +1,234 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+import Faq from '../components/Faq.astro';
+
+const tiers = [
+  {
+    name: 'Free',
+    price: '$0',
+    period: 'forever',
+    tagline: 'For collectors just starting to organize.',
+    cta: 'Get Early Access',
+    ctaHref: '#waitlist',
+    highlighted: false,
+    features: [
+      'Up to 10 items tracked',
+      'Manual price entry',
+      'Basic dashboard (total value, item list)',
+      'Single category only',
+      'CSV import / export',
+      'Community support',
+    ],
+  },
+  {
+    name: 'Pro',
+    price: '$9.99',
+    period: 'per month',
+    tagline: 'For serious collectors with $10K+ in holdings.',
+    cta: 'Join Waitlist',
+    ctaHref: '#waitlist',
+    highlighted: true,
+    badge: 'Most popular',
+    features: [
+      'Unlimited items',
+      'All 4 categories (cards, LEGO, watches, vinyl)',
+      'Automatic weekly valuations',
+      'TCGPlayer, BrickLink, Discogs, eBay sources',
+      'Portfolio ROI, annualized returns',
+      'Insurance valuation PDF reports',
+      'Photo and document storage',
+      'Email support',
+    ],
+  },
+  {
+    name: 'Portfolio',
+    price: '$19.99',
+    period: 'per month',
+    tagline: 'For families, estates, and shared collections.',
+    cta: 'Join Waitlist',
+    ctaHref: '#waitlist',
+    highlighted: false,
+    features: [
+      'Everything in Pro',
+      'Up to 5 user accounts',
+      'Shared collections and permissions',
+      'Estate planning reports',
+      'Advanced analytics (Sharpe ratio, correlation)',
+      'Custom valuation methodologies',
+      'Priority support',
+      'Early access to new categories',
+    ],
+  },
+];
+
+const comparison = [
+  { feature: 'Items tracked', free: '10', pro: 'Unlimited', portfolio: 'Unlimited' },
+  { feature: 'Categories', free: '1', pro: 'All 4', portfolio: 'All 4' },
+  { feature: 'Manual valuations', free: true, pro: true, portfolio: true },
+  { feature: 'Automatic weekly valuations', free: false, pro: true, portfolio: true },
+  { feature: 'Price sources', free: 'Manual only', pro: '7 sources', portfolio: '7 sources + custom' },
+  { feature: 'Portfolio ROI', free: false, pro: true, portfolio: true },
+  { feature: 'Insurance reports', free: false, pro: true, portfolio: true },
+  { feature: 'Photo storage', free: '5 / item', pro: '10 / item', portfolio: 'Unlimited' },
+  { feature: 'Document vault', free: false, pro: true, portfolio: true },
+  { feature: 'Multi-user', free: false, pro: false, portfolio: 'Up to 5' },
+  { feature: 'Advanced analytics', free: false, pro: false, portfolio: true },
+  { feature: 'Estate planning', free: false, pro: false, portfolio: true },
+  { feature: 'Priority support', free: false, pro: false, portfolio: true },
+];
+
+const faqs = [
+  {
+    q: 'Can I switch tiers later?',
+    a: 'Yes. Upgrade or downgrade anytime. Pro-rated billing on upgrades; full credit on downgrades.',
+  },
+  {
+    q: 'Do you offer annual pricing?',
+    a: 'Yes. Pro is $99/year (17% off monthly). Portfolio is $199/year. Both billed annually, cancel anytime with prorated refund.',
+  },
+  {
+    q: 'What happens to my data if I cancel?',
+    a: 'Your data stays accessible for 90 days after cancellation. Export to CSV anytime. After 90 days, your account is deleted permanently.',
+  },
+  {
+    q: 'Is there a family plan?',
+    a: 'Portfolio tier supports up to 5 users on a single account with shared collections and individual permissions.',
+  },
+  {
+    q: 'What if I am not ready for paid?',
+    a: 'Free tier is genuinely useful &mdash; you can track 10 items forever. When you hit the limit, we send a one-time upgrade prompt. No nag emails.',
+  },
+  {
+    q: 'Beta pricing?',
+    a: 'Beta users lock in launch pricing for life &mdash; $7.99/mo for Pro, $15.99/mo for Portfolio. Even if prices rise after launch.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const renderCell = (val: string | boolean) => {
+  if (val === true) return '✓';
+  if (val === false) return '—';
+  return val;
+};
+---
+
+<Layout
+  title="Pricing"
+  description="Simple, collector-friendly pricing. Free for up to 10 items. Pro for serious collectors. Portfolio for families and estates."
+  jsonLd={faqJsonLd}
+>
+  <!-- Header -->
+  <section class="mx-auto max-w-6xl px-6 pt-20 pb-12 sm:pt-28 sm:pb-16 text-center">
+    <h1 class="text-5xl font-bold tracking-tight sm:text-6xl">
+      Pricing that scales with your collection
+    </h1>
+    <p class="mt-6 max-w-2xl mx-auto text-lg text-fg-muted">
+      Free for small collections. Pro for serious collectors. Portfolio for families and estates. No hidden fees.
+    </p>
+  </section>
+
+  <!-- Tier cards -->
+  <section class="mx-auto max-w-6xl px-6 pb-16">
+    <div class="grid gap-6 lg:grid-cols-3">
+      {tiers.map((tier) => (
+        <div
+          class:list={[
+            'relative flex flex-col rounded-2xl border p-8',
+            tier.highlighted
+              ? 'border-accent bg-bg-elevated shadow-xl ring-1 ring-accent'
+              : 'border-border bg-bg',
+          ]}
+        >
+          {tier.badge && (
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span class="inline-flex items-center rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-fg">
+                {tier.badge}
+              </span>
+            </div>
+          )}
+          <h2 class="text-2xl font-bold">{tier.name}</h2>
+          <p class="mt-2 text-sm text-fg-muted">{tier.tagline}</p>
+          <div class="mt-6">
+            <span class="text-5xl font-bold tracking-tight">{tier.price}</span>
+            <span class="ml-2 text-fg-muted">/ {tier.period}</span>
+          </div>
+          <ul class="mt-8 space-y-3 text-sm flex-1">
+            {tier.features.map((f) => (
+              <li class="flex gap-3">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0 text-accent" aria-hidden="true">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={tier.ctaHref}
+            class:list={[
+              'mt-8 inline-flex items-center justify-center rounded-md px-6 py-3 font-semibold transition-opacity hover:opacity-90',
+              tier.highlighted
+                ? 'bg-accent text-accent-fg'
+                : 'border border-border bg-bg text-fg hover:bg-bg-elevated',
+            ]}
+          >
+            {tier.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-center">
+      Feature comparison
+    </h2>
+    <div class="mt-10 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-border">
+            <th class="py-4 pr-4 text-left font-semibold">Feature</th>
+            <th class="px-4 py-4 text-center font-semibold">Free</th>
+            <th class="px-4 py-4 text-center font-semibold text-accent">Pro</th>
+            <th class="px-4 py-4 text-center font-semibold">Portfolio</th>
+          </tr>
+        </thead>
+        <tbody>
+          {comparison.map((row) => (
+            <tr class="border-b border-border">
+              <td class="py-3 pr-4 font-medium">{row.feature}</td>
+              <td class="px-4 py-3 text-center text-fg-muted font-mono">{renderCell(row.free)}</td>
+              <td class="px-4 py-3 text-center font-mono">{renderCell(row.pro)}</td>
+              <td class="px-4 py-3 text-center text-fg-muted font-mono">{renderCell(row.portfolio)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <Faq items={faqs} heading="Pricing FAQ" />
+
+  <!-- Waitlist -->
+  <section id="waitlist" class="mx-auto max-w-3xl px-6 py-16 text-center">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Lock in beta pricing for life
+    </h2>
+    <p class="mt-4 text-lg text-fg-muted">
+      Beta users get $7.99/mo Pro forever, even after launch prices rise.
+    </p>
+    <div class="mt-8">
+      <WaitlistForm source="pricing" />
+    </div>
+  </section>
+</Layout>

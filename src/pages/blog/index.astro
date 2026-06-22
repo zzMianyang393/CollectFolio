@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+// Estimate reading time from raw body
+const readingTime = (body: string | undefined) => {
+  if (!body) return 1;
+  const words = body.split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+};
+
+const categoryColor: Record<string, string> = {
+  Pokemon: 'text-amber-500',
+  LEGO: 'text-red-500',
+  Watches: 'text-blue-500',
+  Vinyl: 'text-purple-500',
+  Insurance: 'text-emerald-500',
+  General: 'text-fg-muted',
+};
+---
+
+<Layout
+  title="Blog"
+  description="Collector-grade analysis: pricing data, investment returns, insurance strategy, and category-specific guides. For serious collectors managing real portfolios."
+>
+  <!-- Header -->
+  <section class="mx-auto max-w-4xl px-6 pt-20 pb-12 sm:pt-28 sm:pb-16">
+    <h1 class="text-5xl font-bold tracking-tight sm:text-6xl">
+      The CollectFolio blog
+    </h1>
+    <p class="mt-6 text-lg text-fg-muted">
+      Collector-grade analysis. Pricing data, investment returns, insurance strategy, and category-specific guides. Written for collectors with real portfolios, not starter binders.
+    </p>
+  </section>
+
+  <!-- Posts list -->
+  <section class="mx-auto max-w-4xl px-6 pb-16">
+    {posts.length === 0 ? (
+      <div class="rounded-lg border border-dashed border-border p-12 text-center">
+        <p class="text-fg-muted">No posts yet. Subscribe to the <a href="/rss.xml" class="text-accent hover:underline">RSS feed</a> for updates.</p>
+      </div>
+    ) : (
+      <ul class="space-y-2">
+        {posts.map((post) => (
+          <li>
+            <a
+              href={`/blog/${post.id}`}
+              class="group block rounded-lg border border-border p-6 transition-all hover:-translate-y-0.5 hover:border-accent hover:shadow-md"
+            >
+              <div class="flex items-center gap-3 text-sm">
+                <span class:list={['font-mono font-semibold', categoryColor[post.data.category] ?? 'text-fg-muted']}>
+                  {post.data.category}
+                </span>
+                <span class="text-fg-muted">·</span>
+                <time datetime={post.data.pubDate.toISOString()} class="text-fg-muted">
+                  {formatDate(post.data.pubDate)}
+                </time>
+                <span class="text-fg-muted">·</span>
+                <span class="text-fg-muted">{readingTime(post.body)} min read</span>
+              </div>
+              <h2 class="mt-3 text-2xl font-bold tracking-tight group-hover:text-accent">
+                {post.data.title}
+              </h2>
+              <p class="mt-2 text-fg-muted">{post.data.description}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+
+  <!-- RSS subscribe -->
+  <section class="mx-auto max-w-4xl px-6 pb-16">
+    <div class="rounded-lg border border-border bg-bg-elevated p-6">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h3 class="font-semibold">Subscribe via RSS</h3>
+          <p class="mt-1 text-sm text-fg-muted">Get new posts in your reader. No email, no tracking.</p>
+        </div>
+        <a
+          href="/rss.xml"
+          class="inline-flex items-center gap-2 rounded-md border border-border bg-bg px-4 py-2 text-sm font-semibold transition-colors hover:bg-bg-elevated"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 11a9 9 0 0 1 9 9"/>
+            <path d="M4 4a16 16 0 0 1 16 16"/>
+            <circle cx="5" cy="19" r="1"/>
+          </svg>
+          RSS feed
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

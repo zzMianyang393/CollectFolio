@@ -1,0 +1,62 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+<svg
+  viewBox="0 0 180 280"
+  xmlns="http://www.w3.org/2000/svg"
+  class={className}
+  role="img"
+  aria-label="Graded trading card slab"
+>
+  <!-- Outer slab (plastic case) -->
+  <rect x="4" y="4" width="172" height="272" rx="10" class="fill-bg-elevated stroke-border" stroke-width="2"/>
+  <!-- Inner bevel -->
+  <rect x="8" y="8" width="164" height="264" rx="7" class="fill-none stroke-fg-muted/20" stroke-width="1"/>
+
+  <!-- Card window border -->
+  <rect x="14" y="14" width="152" height="190" rx="3" class="fill-bg stroke-border" stroke-width="1"/>
+
+  <!-- Card art background -->
+  <rect x="14" y="14" width="152" height="190" class="fill-fg-muted/10"/>
+
+  <!-- Card art scene (simplified) -->
+  <circle cx="90" cy="85" r="32" class="fill-accent/30"/>
+  <ellipse cx="90" cy="125" rx="50" ry="20" class="fill-fg-muted/20"/>
+  <path d="M 50 160 Q 90 145 130 160" class="fill-none stroke-fg-muted/30" stroke-width="2"/>
+
+  <!-- Card name bar -->
+  <rect x="20" y="170" width="100" height="14" class="fill-fg-muted/30"/>
+  <rect x="20" y="186" width="70" height="6" class="fill-fg-muted/20"/>
+
+  <!-- HP box -->
+  <rect x="130" y="170" width="30" height="14" class="fill-fg-muted/30"/>
+  <text x="145" y="180" text-anchor="middle" font-size="6" class="fill-fg-muted" font-weight="600">120 HP</text>
+
+  <!-- Label area -->
+  <rect x="14" y="208" width="152" height="62" rx="2" class="fill-bg border border-border"/>
+  <rect x="14" y="208" width="152" height="62" rx="2" class="fill-none stroke-border" stroke-width="1"/>
+
+  <!-- PSA logo area -->
+  <rect x="20" y="216" width="46" height="22" rx="2" class="fill-fg"/>
+  <text x="43" y="231" text-anchor="middle" font-size="9" class="fill-accent" font-weight="900" letter-spacing="0.5">PSA</text>
+
+  <!-- Cert number -->
+  <text x="72" y="226" font-size="5" class="fill-fg-muted" font-family="ui-monospace, monospace">CERT #</text>
+  <text x="72" y="234" font-size="6.5" class="fill-fg" font-family="ui-monospace, monospace" font-weight="600">72849103</text>
+
+  <!-- Grade -->
+  <circle cx="148" cy="234" r="14" class="fill-accent"/>
+  <circle cx="148" cy="234" r="14" class="fill-none stroke-fg" stroke-width="1"/>
+  <text x="148" y="238" text-anchor="middle" font-size="13" class="fill-accent-fg" font-weight="900">10</text>
+  <text x="148" y="254" text-anchor="middle" font-size="3.5" class="fill-fg-muted" letter-spacing="0.8">GEM MINT</text>
+
+  <!-- Holographic shimmer line -->
+  <line x1="14" y1="206" x2="166" y2="206" class="stroke-accent/40" stroke-width="0.5"/>
+  <line x1="14" y1="14" x2="166" y2="14" class="stroke-accent/30" stroke-width="0.5"/>
+
+  <!-- Subtle reflection on case -->
+  <path d="M 20 10 L 50 10 L 30 270 L 10 270 Z" class="fill-fg/5" opacity="0.3"/>
+</svg>

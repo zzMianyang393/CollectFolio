@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+
+const principles = [
+  {
+    title: 'Median sold, not asking',
+    body: 'Your collection is worth what buyers actually pay &mdash; not what sellers hope. Every valuation comes from aggregated recent sold listings across primary marketplaces. We never use optimistic asking prices.',
+  },
+  {
+    title: 'Methodology disclosed',
+    body: 'Every report tells you exactly how a value was derived: which source, which sold window, which aggregation. Insurance companies, accountants, and your own due diligence all benefit from the transparency.',
+  },
+  {
+    title: 'No fake social proof',
+    body: 'We are pre-launch. We will never show "Trusted by 10,000 collectors" until we actually have 10,000 collectors. Until then: this is what we are building, and you can shape it.',
+  },
+  {
+    title: 'Collector-grade by default',
+    body: 'PSA 10 vs PSA 9. First press vs reissue. Sealed vs open. Box and papers vs watch only. We track the distinctions collectors actually care about &mdash; not generic product categories.',
+  },
+  {
+    title: 'Your data stays yours',
+    body: 'No selling aggregate data, no training models on your collection, no public-by-default profiles. Privacy is the default. Export to CSV anytime.',
+  },
+  {
+    title: 'Pricing that makes sense',
+    body: 'Free tier is useful for real (10 items, manual entry). Pro is fair for what it does. Portfolio is honest about being for families and shared collections. No "contact us for pricing".',
+  },
+];
+---
+
+<Layout
+  title="About"
+  description="Why CollectFolio exists: the cross-category collectibles tracking gap that no current tool closes. Our principles and what we are building."
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-3xl px-6 pt-20 pb-12 sm:pt-28 sm:pb-16">
+    <h1 class="text-5xl font-bold tracking-tight sm:text-7xl">
+      We got tired of the spreadsheet.
+    </h1>
+  </section>
+
+  <!-- Story -->
+  <section class="mx-auto max-w-3xl px-6 py-8">
+    <div class="prose prose-lg">
+      <p class="text-lg text-fg-muted">
+        CollectFolio started the way a lot of useful tools start: someone had a problem they could not solve with what existed.
+      </p>
+      <p class="mt-6 text-lg text-fg-muted">
+        The founders collect across categories. Pokemon cards and a Submariner. Sealed LEGO and a small but embarrassing vinyl habit. The math for each category was different, the data sources were different, and the trackers that existed were vertical-specific storefronts masquerading as tools.
+      </p>
+      <p class="mt-6 text-lg text-fg-muted">
+        TCGPlayer is great for selling cards. WatchCharts is great for tracking references. Discogs is unbeatable for cataloging vinyl. None of them answer the question that actually matters to a multi-category collector: <em>what is everything I own worth right now, in one place?</em>
+      </p>
+      <p class="mt-6 text-lg text-fg-muted">
+        So we are building it.
+      </p>
+    </div>
+  </section>
+
+  <!-- Principles -->
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      What we believe
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg text-fg-muted">
+      These are the principles that shape every feature decision. If you ever see us violate one, tell us.
+    </p>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      {principles.map((p) => (
+        <div class="rounded-lg border border-border p-6">
+          <h3 class="text-lg font-semibold">{p.title}</h3>
+          <p class="mt-3 text-sm text-fg-muted" set:html={p.body} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Where we are
+    </h2>
+    <div class="mt-8 space-y-8 border-l-2 border-border pl-6">
+      <div>
+        <div class="font-mono text-sm text-fg-muted">Q1&ndash;Q2 2026</div>
+        <h3 class="mt-1 text-lg font-semibold">Demand validation (now)</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Landing pages up. Search traffic being measured. Validating that the categories and keywords we picked are actually searched for. This site is the test.
+        </p>
+      </div>
+      <div>
+        <div class="font-mono text-sm text-fg-muted">Q3 2026</div>
+        <h3 class="mt-1 text-lg font-semibold">Closed beta</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          First 500 waitlist users. Pokemon tracking ships first (the category with the strongest existing data sources). Then LEGO, watches, vinyl in sequence.
+        </p>
+      </div>
+      <div>
+        <div class="font-mono text-sm text-fg-muted">Q4 2026</div>
+        <h3 class="mt-1 text-lg font-semibold">Public launch</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Free, Pro, and Portfolio tiers open. All four categories. Insurance reports. Mobile-responsive.
+        </p>
+      </div>
+      <div>
+        <div class="font-mono text-sm text-fg-muted">2027+</div>
+        <h3 class="mt-1 text-lg font-semibold">Expansion</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Sneakers, coins, comics, sports cards, watches beyond luxury. Native iOS / Android. API for power users.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team placeholder -->
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Who is building this
+    </h2>
+    <p class="mt-4 text-lg text-fg-muted">
+      A small team of collectors and engineers who got tired of building the same spreadsheet over and over. We are funded by users &mdash; revenue from Pro subscriptions funds development. No VC, no growth-at-all-costs.
+    </p>
+    <p class="mt-4 text-lg text-fg-muted">
+      We are based remotely across North America and Europe.
+    </p>
+  </section>
+
+  <!-- Waitlist -->
+  <section id="waitlist" class="mx-auto max-w-3xl px-6 py-16 text-center">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Shape what we build
+    </h2>
+    <p class="mt-4 text-lg text-fg-muted">
+      Beta users get locked-in pricing, early access, and a direct line to the team building the features they asked for.
+    </p>
+    <div class="mt-8">
+      <WaitlistForm source="about" />
+    </div>
+  </section>
+</Layout>

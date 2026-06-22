@@ -1,0 +1,38 @@
+---
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: FaqItem[];
+  heading?: string;
+  id?: string;
+}
+
+const { items, heading = 'Frequently asked questions', id = 'faq' } = Astro.props;
+---
+<section id={id} class="mx-auto max-w-3xl px-6 py-16">
+  <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">{heading}</h2>
+  <dl class="mt-10 space-y-2">
+    {items.map((item, i) => (
+      <details class="group rounded-lg border border-border bg-bg-elevated open:bg-bg-elevated/50">
+        <summary class="flex cursor-pointer items-center justify-between gap-4 p-5 font-semibold transition-colors hover:text-accent">
+          <span>{item.q}</span>
+          <svg
+            width="20" height="20" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="shrink-0 text-fg-muted transition-transform group-open:rotate-180"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </summary>
+        <dd class="px-5 pb-5 text-fg-muted">
+          <Fragment set:html={item.a} />
+        </dd>
+      </details>
+    ))}
+  </dl>
+</section>

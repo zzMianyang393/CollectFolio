@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Privacy"
+  description="How CollectFolio handles your data: what we collect, what we do not, and your rights."
+>
+  <article class="mx-auto max-w-3xl px-6 pt-20 pb-16 sm:pt-28">
+    <h1 class="text-5xl font-bold tracking-tight">Privacy</h1>
+    <p class="mt-4 text-sm text-fg-muted">Last updated: June 2026</p>
+
+    <div class="prose prose-lg mt-12 max-w-none
+      prose-headings:font-bold prose-headings:tracking-tight
+      prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-2xl
+      prose-p:my-4 prose-p:leading-relaxed
+    ">
+      <p>
+        CollectFolio takes privacy seriously. This page covers what we collect, what we do with it, and what we never do.
+      </p>
+
+      <h2>What we collect</h2>
+      <p>
+        When you join the waitlist, we collect your email address and the page you signed up from. When you use the product (post-launch), we collect the collection data you enter and the analytics events you trigger in the app.
+      </p>
+
+      <h2>What we do not collect</h2>
+      <p>
+        We do not sell your data to third parties. We do not use your collection data to train AI models. We do not run cross-site tracking or fingerprinting.
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        Cloudflare Web Analytics is enabled site-wide. It is cookie-free and does not collect personal identifiers. Google Analytics is not used. Microsoft Clarity (heatmaps) is opt-in and not enabled by default.
+      </p>
+
+      <h2>Where your data lives</h2>
+      <p>
+        Waitlist emails and (post-launch) collection data are stored in Cloudflare D1 databases. D1 stores data in SQLite files distributed across Cloudflare's network. Data is encrypted at rest and in transit.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        You can request export or deletion of your data at any time by emailing <a href="mailto:privacy@collectfolio.com">privacy@collectfolio.com</a>. We respond within 7 days.
+      </p>
+
+      <h2>Changes to this policy</h2>
+      <p>
+        We will notify waitlist subscribers by email before any material change takes effect. The "last updated" date at the top of this page reflects the most recent revision.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions: <a href="mailto:privacy@collectfolio.com">privacy@collectfolio.com</a>
+      </p>
+    </div>
+  </article>
+</Layout>

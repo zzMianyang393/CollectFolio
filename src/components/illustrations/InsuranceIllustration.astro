@@ -1,0 +1,58 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+<svg
+  viewBox="0 0 200 240"
+  xmlns="http://www.w3.org/2000/svg"
+  class={className}
+  role="img"
+  aria-label="Insurance document and shield"
+>
+  <!-- Shield outline -->
+  <path d="M 100 8 L 184 38 L 184 130 Q 184 200 100 232 Q 16 200 16 130 L 16 38 Z"
+        class="fill-bg-elevated stroke-border" stroke-width="2"/>
+
+  <!-- Inner shield border -->
+  <path d="M 100 18 L 174 44 L 174 130 Q 174 192 100 222 Q 26 192 26 130 L 26 44 Z"
+        class="fill-none stroke-fg-muted/30" stroke-width="1"/>
+
+  <!-- Document inside shield -->
+  <rect x="58" y="68" width="84" height="118" rx="3" class="fill-bg stroke-border" stroke-width="1.5"/>
+
+  <!-- Document header bar -->
+  <rect x="58" y="68" width="84" height="16" class="fill-fg"/>
+  <text x="100" y="79" text-anchor="middle" font-size="6" class="fill-accent" font-weight="700" letter-spacing="1.5">VALUATION</text>
+
+  <!-- Document content lines -->
+  <g class="fill-fg-muted/40">
+    <rect x="66" y="94" width="50" height="2"/>
+    <rect x="66" y="100" width="68" height="2"/>
+    <rect x="66" y="106" width="40" height="2"/>
+  </g>
+
+  <!-- Divider -->
+  <line x1="66" y1="116" x2="134" y2="116" class="stroke-border" stroke-width="0.5"/>
+
+  <!-- Value box -->
+  <rect x="66" y="124" width="68" height="22" class="fill-bg-elevated stroke-border" stroke-width="0.5"/>
+  <text x="100" y="134" text-anchor="middle" font-size="4" class="fill-fg-muted" letter-spacing="1">TOTAL VALUE</text>
+  <text x="100" y="143" text-anchor="middle" font-size="9" class="fill-fg" font-weight="800" font-family="ui-monospace, monospace">$17,790</text>
+
+  <!-- Chart bars -->
+  <g class="fill-accent">
+    <rect x="66" y="154" width="6" height="14" rx="1"/>
+    <rect x="76" y="158" width="6" height="10" rx="1"/>
+    <rect x="86" y="152" width="6" height="16" rx="1"/>
+    <rect x="96" y="155" width="6" height="13" rx="1"/>
+    <rect x="106" y="149" width="6" height="19" rx="1"/>
+    <rect x="116" y="153" width="6" height="15" rx="1"/>
+    <rect x="126" y="150" width="6" height="18" rx="1"/>
+  </g>
+
+  <!-- Checkmark badge -->
+  <circle cx="142" cy="74" r="10" class="fill-accent"/>
+  <path d="M 137 74 L 141 78 L 147 71" class="fill-none stroke-accent-fg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

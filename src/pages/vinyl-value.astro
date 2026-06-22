@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+import Faq from '../components/Faq.astro';
+import VinylIllustration from '../components/illustrations/VinylIllustration.astro';
+
+const faqs = [
+  {
+    q: 'Does CollectFolio replace Discogs?',
+    a: 'No — Discogs is the canonical database for vinyl, and we integrate with it. You can pull your Discogs collection directly. We add what Discogs does not do: live market value tracking, portfolio ROI, insurance reports, and cross-category consolidation.',
+  },
+  {
+    q: 'How are vinyl prices calculated?',
+    a: 'For each release, we aggregate median sold from Discogs marketplace, eBay sold, and specialist shops (Reckless, A1, etc.). Media condition and sleeve condition tracked separately — both affect price significantly.',
+  },
+  {
+    q: 'What about original pressings vs reissues?',
+    a: 'Tracked as separate line items automatically. A 1968 UK first press of The Beatles White Album commands $1,500-$3,000. A 2018 reissue: $40. We pull pressing details from Discogs and price accordingly.',
+  },
+  {
+    q: 'Can I track colored and limited variants?',
+    a: 'Yes. Picture discs, colored vinyl, RSD exclusives, limited editions, and numbered variants are first-class items. Discogs format and "Have / Want" data informs rarity scoring.',
+  },
+  {
+    q: 'Is my Discogs data private?',
+    a: 'Yes. We use Discogs for read-only lookup of release data. Your collection data stays in your CollectFolio account. We never share your library publicly unless you opt in.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Layout
+  title="Vinyl Record Value Tracker"
+  description="Track your vinyl record collection value across original pressings, colored variants, and sealed collectibles. Discogs-integrated, live pricing, insurance reports."
+  jsonLd={faqJsonLd}
+>
+  <section class="mx-auto max-w-6xl px-6 pt-20 pb-16 sm:pt-28 sm:pb-20">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <p class="text-sm font-medium uppercase tracking-wider text-fg-muted">
+          Original pressings, colored variants, sealed collectibles
+        </p>
+        <h1 class="mt-6 text-4xl font-bold tracking-tight sm:text-6xl">
+          A vinyl collection tracker that knows a first press from a reissue
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg text-fg-muted">
+          Discogs integration for cataloging, plus the thing Discogs does not do: track what your collection is actually worth. Media and sleeve condition tracked separately. Real ROI on every record.
+        </p>
+        <div class="mt-8">
+          <WaitlistForm source="vinyl-value" buttonLabel="Notify me at launch" />
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <VinylIllustration class="w-full max-w-sm" />
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Discogs is for cataloging. CollectFolio is for valuing.
+    </h2>
+    <p class="mt-6 text-lg text-fg-muted">
+      Discogs is unbeatable for cataloging — release IDs, label matrices, country pressings, the whole thing. Most collectors maintain a Discogs library with hundreds of entries.
+    </p>
+    <p class="mt-4 text-lg text-fg-muted">
+      But Discogs does not answer the only question that matters for a serious collector: <em>what is all of this worth right now?</em> The marketplace data is there, but tracking condition, valuing your collection as a portfolio, generating insurance reports — that is what CollectFolio adds.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      What you get
+    </h2>
+    <div class="mt-12 grid gap-8 md:grid-cols-2">
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Discogs sync</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          OAuth import your existing collection. Pressing details, release IDs, and master release data come over automatically.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Media + sleeve grading</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Goldmine grading (Mint, NM, VG+, VG, G+, G, Fair, Poor) for both record and sleeve. Tracked separately because they price independently.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Rarity scoring</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Combines Discogs "Have / Want" ratio, sales velocity, and historical prices. Surfaces the buried treasures in your collection.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Original press identification</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          We flag likely first pressings based on matrix numbers, label design, and pressing country. Verify against Discogs data.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Portfolio reporting</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Total value, top 10 appreciating records, genre breakdown, and decade distribution. See your collection as an asset class.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Insurance PDFs</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Detailed reports with item, artist, release, condition, value, and source. The format collectors insurers actually want.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} heading="Vinyl tracker FAQ" />
+
+  <section id="waitlist" class="mx-auto max-w-3xl px-6 py-16 text-center">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Find out what your crates are actually worth
+    </h2>
+    <p class="mt-4 text-lg text-fg-muted">
+      Beta opens Q3 2026. Join the waitlist for early access.
+    </p>
+    <div class="mt-8">
+      <WaitlistForm source="vinyl-value-bottom" />
+    </div>
+  </section>
+</Layout>

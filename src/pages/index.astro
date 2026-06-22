@@ -1,0 +1,237 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+import Faq from '../components/Faq.astro';
+import WatchIllustration from '../components/illustrations/WatchIllustration.astro';
+import CardSlabIllustration from '../components/illustrations/CardSlabIllustration.astro';
+import LegoIllustration from '../components/illustrations/LegoIllustration.astro';
+import VinylIllustration from '../components/illustrations/VinylIllustration.astro';
+
+const categories = [
+  {
+    href: '/pokemon-tracker',
+    name: 'Trading Cards',
+    short: 'PSA, BGS, CGC graded cards. Track sealed product, raw inventory, and graded slabs.',
+    Illustration: CardSlabIllustration,
+    stat: '$25K+ for PSA 10 Charizard',
+  },
+  {
+    href: '/lego-investment',
+    name: 'LEGO Sets',
+    short: 'Sealed sets, built displays, and rare minifigures. Track retail vs aftermarket.',
+    Illustration: LegoIllustration,
+    stat: '+12% YoY appreciation',
+  },
+  {
+    href: '/watch-collection',
+    name: 'Watches',
+    short: 'Rolex, Omega, Patek. Track reference prices, service intervals, and provenance.',
+    Illustration: WatchIllustration,
+    stat: 'Reference pricing live',
+  },
+  {
+    href: '/vinyl-value',
+    name: 'Vinyl Records',
+    short: 'Original pressings, colored variants, sealed collectibles. Discogs integrated.',
+    Illustration: VinylIllustration,
+    stat: '2M+ releases indexed',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What is CollectFolio?',
+    a: 'CollectFolio is a cross-category collectibles portfolio manager. Add items to a single dashboard and we pull live market data from TCGPlayer, BrickLink, WatchCharts, Discogs, and eBay sold listings. You see total value, returns, and category breakdowns — instead of juggling five spreadsheets.',
+  },
+  {
+    q: 'Which collectible categories do you support?',
+    a: 'At launch: Pokemon, Magic, Yu-Gi-Oh trading cards; LEGO sets and minifigures; luxury and indie watches; vinyl records. Sneakers, coins, and comics are on the roadmap for late 2026.',
+  },
+  {
+    q: 'Where do the prices come from?',
+    a: 'We aggregate median sold prices from primary marketplaces — not asking prices. For cards: TCGPlayer market price and eBay recent sales. For LEGO: BrickLink used/new and eBay. For watches: Chrono24, WatchCharts, and eBay sold. For vinyl: Discogs. Each item shows the source and date.',
+  },
+  {
+    q: 'Can I import my existing collection?',
+    a: 'Yes. CSV import at launch covers all four categories with the fields collectors actually track. For graded cards, we accept PSA cert numbers and auto-pull grade, year, set, and population data.',
+  },
+  {
+    q: 'How do you handle insurance valuation?',
+    a: 'Generate a PDF valuation report with one click. It includes every item, current market value, sources, and dates. Most major collectors insurers (American Collectors, Collectibles Insurance Services, Hughey Insurance) accept it as supporting documentation.',
+  },
+  {
+    q: 'Is my collection data private?',
+    a: 'Yes. Your portfolio is private by default. We never share item-level data with third parties. Anonymous, aggregated category trends may inform future market reports, but never individual positions.',
+  },
+  {
+    q: 'When does CollectFolio launch?',
+    a: 'Closed beta in Q3 2026. Public launch in Q4 2026. Join the waitlist for early access — beta users get lifetime pricing locked in.',
+  },
+];
+---
+
+<Layout
+  title="CollectFolio"
+  description="Track Pokemon cards, LEGO, watches, and vinyl in one portfolio. Total value, real returns, insurance reports — without the spreadsheet."
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'CollectFolio',
+    url: 'https://collectfolio.pages.dev',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://collectfolio.pages.dev/blog?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  }}
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-6xl px-6 pt-20 pb-16 sm:pt-32 sm:pb-24">
+    <div class="max-w-3xl">
+      <p class="text-sm font-medium uppercase tracking-wider text-fg-muted">
+        For collectors with $10K&ndash;$500K in holdings
+      </p>
+      <h1 class="mt-6 text-5xl font-bold tracking-tight sm:text-7xl">
+        Your collection.<br />
+        <span class="text-accent">Your portfolio.</span>
+      </h1>
+      <p class="mt-8 max-w-2xl text-xl text-fg-muted">
+        Track every card, brick, dial, and groove in one place. Watch your total value. Compare returns across categories. Generate insurance reports without opening a spreadsheet.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a
+          href="#waitlist"
+          class="inline-flex items-center gap-2 rounded-md bg-accent px-6 py-3 text-base font-semibold text-accent-fg transition-opacity hover:opacity-90"
+        >
+          Get Early Access
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a
+          href="#categories"
+          class="inline-flex items-center rounded-md border border-border px-6 py-3 text-base font-semibold transition-colors hover:bg-bg-elevated"
+        >
+          Browse categories
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <dl class="mt-16 grid grid-cols-2 gap-x-6 gap-y-8 border-y border-border py-10 sm:grid-cols-4">
+      <div>
+        <dd class="font-mono text-3xl font-bold tracking-tight">$17,790</dd>
+        <div class="mt-1 text-sm text-fg-muted">Sample portfolio value</div>
+      </div>
+      <div>
+        <dd class="font-mono text-3xl font-bold tracking-tight text-accent">+34%</dd>
+        <div class="mt-1 text-sm text-fg-muted">All-time return</div>
+      </div>
+      <div>
+        <dd class="font-mono text-3xl font-bold tracking-tight">149</dd>
+        <div class="mt-1 text-sm text-fg-muted">Items, 4 categories</div>
+      </div>
+      <div>
+        <dd class="font-mono text-3xl font-bold tracking-tight">7</dd>
+        <div class="mt-1 text-sm text-fg-muted">Marketplaces</div>
+      </div>
+    </dl>
+  </section>
+
+  <!-- Categories with illustrations -->
+  <section id="categories" class="mx-auto max-w-6xl px-6 py-16">
+    <div class="max-w-2xl">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+        One portfolio. Every category.
+      </h2>
+      <p class="mt-4 text-lg text-fg-muted">
+        Stop bouncing between TCGPlayer, WatchCharts, BrickLink, and Discogs. CollectFolio pulls live market data into a single dashboard.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 sm:grid-cols-2">
+      {categories.map(({ href, name, short, Illustration, stat }) => (
+        <a
+          href={href}
+          class="group relative flex flex-col overflow-hidden rounded-lg border border-border transition-all hover:-translate-y-0.5 hover:border-accent hover:shadow-lg"
+        >
+          <div class="flex items-center justify-center bg-bg-elevated px-6 py-10 transition-colors group-hover:bg-accent/5">
+            <Illustration class="h-44 w-auto" />
+          </div>
+          <div class="flex flex-1 flex-col p-6">
+            <div class="flex items-baseline justify-between gap-4">
+              <h3 class="text-lg font-semibold">{name}</h3>
+              <span class="text-xs font-medium text-accent">{stat}</span>
+            </div>
+            <p class="mt-2 flex-1 text-sm text-fg-muted">{short}</p>
+            <div class="mt-5 inline-flex items-center gap-1 text-sm font-medium text-accent">
+              Explore
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <div class="max-w-2xl">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+        How it works
+      </h2>
+      <p class="mt-4 text-lg text-fg-muted">
+        Three steps from spreadsheet to a real portfolio view.
+      </p>
+    </div>
+
+    <ol class="mt-12 grid gap-6 md:grid-cols-3">
+      <li class="rounded-lg border border-border p-6">
+        <div class="font-mono text-sm text-fg-muted">01</div>
+        <h3 class="mt-3 text-lg font-semibold">Add your items</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Type a name or paste a PSA cert number. We auto-pull card sets, LEGO numbers, watch references, and Discogs IDs.
+        </p>
+      </li>
+      <li class="rounded-lg border border-border p-6">
+        <div class="font-mono text-sm text-fg-muted">02</div>
+        <h3 class="mt-3 text-lg font-semibold">Get live valuations</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Weekly price updates from seven marketplaces. We aggregate the median — not the highest hopeful listing.
+        </p>
+      </li>
+      <li class="rounded-lg border border-border p-6">
+        <div class="font-mono text-sm text-fg-muted">03</div>
+        <h3 class="mt-3 text-lg font-semibold">See real returns</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Cost basis, current value, all-time and annualized return — per item and across your whole portfolio.
+        </p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- FAQ -->
+  <Faq items={faqs} heading="Questions collectors actually ask" />
+
+  <!-- Waitlist -->
+  <section id="waitlist" class="mx-auto max-w-6xl px-6 py-16">
+    <div class="rounded-2xl border border-border bg-bg-elevated p-10 sm:p-16">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+          Be first when we launch
+        </h2>
+        <p class="mt-4 text-lg text-fg-muted">
+          Early access opens Q3 2026. No marketing spam &mdash; one email at launch, and a monthly note with collector-grade insights.
+        </p>
+        <div class="mt-8">
+          <WaitlistForm source="homepage" />
+        </div>
+        <p class="mt-4 text-xs text-fg-muted">
+          Free during beta. Beta users lock in lifetime pricing.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+import Faq from '../components/Faq.astro';
+import CardSlabIllustration from '../components/illustrations/CardSlabIllustration.astro';
+
+const faqs = [
+  {
+    q: 'Does CollectFolio track PSA, BGS, and CGC graded cards?',
+    a: 'Yes. Paste any PSA, BGS, or CGC cert number and we auto-pull grade, year, set, card number, and the population report for that grade. Raw (ungraded) cards are tracked separately with manual price entries.',
+  },
+  {
+    q: 'How are Pokemon card prices calculated?',
+    a: 'For graded cards, we use the median of recent eBay sold listings filtered to the exact grade, plus the TCGPlayer market price for raw and Japanese variants. Sealed product (booster boxes, ETBs) is tracked via TCGPlayer and eBay sold.',
+  },
+  {
+    q: 'Can I track vintage cards (Base Set, Neo, etc.)?',
+    a: 'Yes. We have full coverage of Base Set (1999) through recent Scarlet & Violet releases. Vintage Japanese cards are supported via dedicated Japanese marketplace sources.',
+  },
+  {
+    q: 'What about sealed product like booster boxes?',
+    a: 'Sealed product is a first-class category — booster boxes, Elite Trainer Boxes, Collection Boxes, tins, and graded sealed cases each get their own price line. We track both Japanese and English sealed separately.',
+  },
+  {
+    q: 'When does the Pokemon tracker launch?',
+    a: 'Pokemon is the first category we are building out for the closed beta. Join the waitlist to be notified when card tracking opens.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Layout
+  title="Pokemon Card Collection Tracker"
+  description="Track every Pokemon card in your collection — PSA, BGS, CGC graded slabs, raw cards, sealed product. Live prices, portfolio ROI, insurance reports."
+  jsonLd={faqJsonLd}
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-6xl px-6 pt-20 pb-16 sm:pt-28 sm:pb-20">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <p class="text-sm font-medium uppercase tracking-wider text-fg-muted">
+          For PSA, BGS, CGC graded and raw
+        </p>
+        <h1 class="mt-6 text-4xl font-bold tracking-tight sm:text-6xl">
+          The Pokemon card collection tracker built for serious collectors
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg text-fg-muted">
+          Track graded slabs, raw cards, sealed product, and Japanese variants in one portfolio. Live median prices from TCGPlayer and eBay sold. See real ROI on every Charizard you own.
+        </p>
+        <div class="mt-8">
+          <WaitlistForm source="pokemon-tracker" buttonLabel="Notify me at launch" />
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <CardSlabIllustration class="w-full max-w-xs" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      The spreadsheet problem
+    </h2>
+    <p class="mt-6 text-lg text-fg-muted">
+      You started with one row in a Google Sheet for your Base Set Charizard. Then a BGS 9.5 Lugia. Then three booster boxes. Then twenty more PSA 10s. The sheet is now a 200-row monster with formulas you stopped trusting six months ago.
+    </p>
+    <p class="mt-4 text-lg text-fg-muted">
+      And the prices — when did you last update them? Pokemon card values can swing 30% in a quarter. A spreadsheet with stale numbers is worse than no tracking at all.
+    </p>
+  </section>
+
+  <!-- Solution / Features -->
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      What CollectFolio does for Pokemon collectors
+    </h2>
+
+    <div class="mt-12 grid gap-8 md:grid-cols-2">
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Paste a PSA cert number</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          We pull grade, year, set, card number, and the population report for that exact grade. No more typo'd card names.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Median sold, not asking</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          We aggregate recent eBay sold listings at the exact grade. No $50,000 "buy it now" outliers skewing your portfolio value.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Sealed product, separate</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Booster boxes, ETBs, and tins tracked as their own line items with TCGPlayer market + eBay sold as sources.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Japanese variants</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Japanese Base Set, Eeveelutions, and modern sets priced from Yahoo Auctions Japan and Buyee-eBay crossover.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Cost basis tracking</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Record what you paid. We calculate all-time ROI and annualized return per card and across your collection.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Insurance reports</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          One-click PDF for your insurer — every card, grade, value, source, and date.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <Faq items={faqs} heading="Pokemon tracker FAQ" />
+
+  <!-- Waitlist CTA -->
+  <section id="waitlist" class="mx-auto max-w-3xl px-6 py-16 text-center">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Stop guessing what your binder is worth
+    </h2>
+    <p class="mt-4 text-lg text-fg-muted">
+      Beta opens Q3 2026. Pokemon tracking is the first category we are shipping. Be there day one.
+    </p>
+    <div class="mt-8">
+      <WaitlistForm source="pokemon-tracker-bottom" />
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,53 @@
+---
+const navItems = [
+  { href: '/pokemon-tracker', label: 'Cards' },
+  { href: '/lego-investment', label: 'LEGO' },
+  { href: '/watch-collection', label: 'Watches' },
+  { href: '/vinyl-value', label: 'Vinyl' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/pricing', label: 'Pricing' },
+];
+
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+    <a href="/" class="flex items-center gap-2 text-lg font-bold tracking-tight" aria-label="CollectFolio home">
+      <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true" class="text-accent">
+        <rect width="32" height="32" rx="6" fill="currentColor"/>
+        <path d="M8 11h16M8 16h12M8 21h8" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <span>CollectFolio</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden md:flex">
+      <ul class="flex items-center gap-6 text-sm">
+        {navItems.map((item) => {
+          const active = pathname === item.href || pathname.startsWith(item.href + '/');
+          return (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  'transition-colors hover:text-accent',
+                  active ? 'text-accent' : 'text-fg-muted',
+                ]}
+                aria-current={active ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+
+    <a
+      href="/#waitlist"
+      class="inline-flex items-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-fg transition-opacity hover:opacity-90"
+    >
+      Get Early Access
+    </a>
+  </div>
+</header>

@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+import Faq from '../components/Faq.astro';
+import WatchIllustration from '../components/illustrations/WatchIllustration.astro';
+
+const faqs = [
+  {
+    q: 'Which watch brands does CollectFolio support?',
+    a: 'At launch: Rolex, Omega, Patek Philippe, Audemars Piguet, IWC, Jaeger-LeCoultre, Cartier, Tudor, Panerai, Vacheron Constantin, and indie makers (F.P. Journe, A. Lange & Söhne, H. Moser). Coverage expands with demand.',
+  },
+  {
+    q: 'How are watch values determined?',
+    a: 'Reference-level pricing from Chrono24 (median of sold listings, not asking), WatchCharts historical data, and recent eBay sold for specific examples with box & papers. Service-cost adjustments are factored in.',
+  },
+  {
+    q: 'Do you track service intervals?',
+    a: 'Yes. Each watch has a service reminder based on manufacturer recommendations (Rolex ~10 years, Omega ~5-8 years, etc.). You get a notification at 80% of the recommended interval.',
+  },
+  {
+    q: 'Can I track provenance and papers?',
+    a: 'Yes. Per-watch fields for: full set vs watch only, original box, papers, original receipt, service history, warranty card, original strap. These all affect value and are tracked separately.',
+  },
+  {
+    q: 'What about insurance for watches?',
+    a: 'Generate a PDF with serial numbers, reference, condition, current market value, and provenance. Most specialist watch insurers (Chronext, Hodinkee Insurance, Jewelers Mutual) accept it as a starting point for valuation.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Layout
+  title="Watch Collection Management"
+  description="Track your watch collection: reference prices, service intervals, provenance, and ROI. Coverage for Rolex, Omega, Patek, AP, Cartier, and 50+ brands."
+  jsonLd={faqJsonLd}
+>
+  <section class="mx-auto max-w-6xl px-6 pt-20 pb-16 sm:pt-28 sm:pb-20">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <p class="text-sm font-medium uppercase tracking-wider text-fg-muted">
+          For Rolex, Omega, Patek, and the independents
+        </p>
+        <h1 class="mt-6 text-4xl font-bold tracking-tight sm:text-6xl">
+          A watch collection manager that knows what a Submariner is worth
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg text-fg-muted">
+          Track every reference, box, paper, and service date. Get current Chrono24 and eBay pricing. Know when your Datejust is due for service before your AD reminds you.
+        </p>
+        <div class="mt-8">
+          <WaitlistForm source="watch-collection" buttonLabel="Notify me at launch" />
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <WatchIllustration class="w-full max-w-[14rem]" />
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Why spreadsheets fail for watches
+    </h2>
+    <p class="mt-6 text-lg text-fg-muted">
+      A watch collection has more state than a stock portfolio. Each piece has a reference number, year, box/papers status, service history, bracelet type, and a market price that moves daily.
+    </p>
+    <p class="mt-4 text-lg text-fg-muted">
+      Add three watches and the spreadsheet becomes 50 columns. Add fifteen and you've stopped updating it. The result: a portfolio you can't actually value, and service dates you forget until something breaks.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      What CollectFolio does for watch collectors
+    </h2>
+    <div class="mt-12 grid gap-8 md:grid-cols-2">
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Reference-level pricing</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          We know that a 126610LN Submariner is a different watch than a 116610LN. Pricing, service intervals, and history tracked per reference.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Box & papers tracking</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Full set with original receipt can be 30%+ more than watch only. We track completeness per piece and value it correctly.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Service reminders</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Brand-specific intervals. Rolex ~10 years, Omega ~5-8 years, AP and Patek ~5 years. We notify you at 80% so you can plan ahead.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Provenance & serial tracking</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          Per-watch serial numbers, AD purchase records, prior ownership notes — all the context that affects long-term value.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Insurance-ready reports</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          PDF with serial numbers, references, values, and provenance. Most specialist watch insurers accept it as supporting documentation.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border p-6">
+        <h3 class="text-lg font-semibold">Market index comparison</h3>
+        <p class="mt-2 text-sm text-fg-muted">
+          See how your collection performs vs the WatchCharts Rolex index, the broader luxury watch market, or your personal benchmarks.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} heading="Watch collection FAQ" />
+
+  <section id="waitlist" class="mx-auto max-w-3xl px-6 py-16 text-center">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Stop guessing what's in your watch box
+    </h2>
+    <p class="mt-4 text-lg text-fg-muted">
+      Beta opens Q3 2026. Join the waitlist for early access.
+    </p>
+    <div class="mt-8">
+      <WaitlistForm source="watch-collection-bottom" />
+    </div>
+  </section>
+</Layout>
