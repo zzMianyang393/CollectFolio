@@ -1,19 +1,12 @@
 /// <reference types="@cloudflare/workers-types" />
 
+import { parseWaitlistSubmission, type WaitlistPayload } from './waitlist-logic';
+
 interface Env {
   DB: D1Database;
   RESEND_API_KEY?: string;
   ALLOWED_ORIGIN?: string;
 }
-
-interface WaitlistPayload {
-  email?: unknown;
-  source?: unknown;
-}
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const MAX_EMAIL_LEN = 254; // RFC 5321
-const MAX_SOURCE_LEN = 64;
 
 const json = (data: unknown, status = 200) =>
   new Response(JSON.stringify(data), {
@@ -66,12 +59,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return json({ error: 'Invalid JSON' }, 400);
   }
 
-  const email = typeof payload.email === 'string' ? payload.email.trim().toLowerCase() : '';
-  const source = typeof payload.source === 'string' ? payload.source.slice(0, MAX_SOURCE_LEN) : 'unknown';
-
-  if (!email || email.length > MAX_EMAIL_LEN || !EMAIL_RE.test(email)) {
-    return json({ error: 'Invalid email' }, 400);
-  }
+  const parsed = parseWaitlistSubmission(payload, context.request.url);
+  if (!parsed.ok) return json({ error: parsed.error }, parsed.status);
+  const { email, source, landingPath, referrer, utmSource, utmMedium, utmCampaign } = parsed.data;
 
   // Honeypot / basic spam heuristics
   if (email.endsWith('.ru') || email.includes('mailinator') || email.includes('tempmail')) {
@@ -82,8 +72,21 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   // Insert into D1
   try {
     await context.env.DB.prepare(
-      'INSERT INTO waitlist (email, source, created_at, user_agent) VALUES (?, ?, ?, ?)'
-    ).bind(email, source, new Date().toISOString(), context.request.headers.get('User-Agent') ?? '').run();
+      `INSERT INTO waitlist (
+        email, source, landing_path, referrer, utm_source, utm_medium, utm_campaign,
+        created_at, user_agent
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    ).bind(
+      email,
+      source,
+      landingPath,
+      referrer,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      new Date().toISOString(),
+      context.request.headers.get('User-Agent') ?? '',
+    ).run();
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     // Unique constraint: already on the list

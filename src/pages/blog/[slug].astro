@@ -43,6 +43,31 @@ const articleJsonLd = {
   },
 };
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: new URL('/', Astro.site ?? 'https://collectfolio.pages.dev').toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Blog',
+      item: new URL('/blog', Astro.site ?? 'https://collectfolio.pages.dev').toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: post.data.title,
+      item: new URL(`/blog/${post.id}`, Astro.site ?? 'https://collectfolio.pages.dev').toString(),
+    },
+  ],
+};
+
 // Find related posts (same category, exclude self)
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const related = allPosts
@@ -55,9 +80,16 @@ const related = allPosts
   title={post.data.title}
   description={post.data.description}
   type="article"
-  jsonLd={articleJsonLd}
+  jsonLd={[articleJsonLd, breadcrumbJsonLd]}
 >
   <article class="mx-auto max-w-3xl px-6 pt-16 pb-12 sm:pt-24 sm:pb-16">
+    <nav aria-label="Breadcrumb" class="mb-8 text-sm text-fg-muted">
+      <a href="/" class="hover:text-accent">Home</a>
+      <span aria-hidden="true"> / </span>
+      <a href="/blog" class="hover:text-accent">Blog</a>
+      <span aria-hidden="true"> / </span>
+      <span aria-current="page">{post.data.category}</span>
+    </nav>
     <!-- Header -->
     <header class="mb-12">
       <div class="flex flex-wrap items-center gap-3 text-sm">
@@ -66,6 +98,12 @@ const related = allPosts
         <time datetime={post.data.pubDate.toISOString()} class="text-fg-muted">
           {formatDate(post.data.pubDate)}
         </time>
+        {post.data.updatedDate && (
+          <>
+            <span class="text-fg-muted">·</span>
+            <span class="text-fg-muted">Updated {formatDate(post.data.updatedDate)}</span>
+          </>
+        )}
         <span class="text-fg-muted">·</span>
         <span class="text-fg-muted">{readingMinutes} min read</span>
       </div>

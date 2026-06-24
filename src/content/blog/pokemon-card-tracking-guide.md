@@ -1,6 +1,6 @@
 ---
-title: "How to Track Pokemon Card Collection Value in 2026"
-description: "A practical guide to tracking Pokemon card values across PSA graded slabs, raw cards, and sealed product. Tools, sources, and what to ignore."
+title: "How to Track Pokemon Card Collection Value Without Stale Prices"
+description: "A practical workflow for tracking Pokemon card collection value across graded slabs, raw cards, and sealed products without relying on stale asking prices."
 pubDate: 2026-06-15
 author: "CollectFolio Team"
 category: "Pokemon"
@@ -77,4 +77,4 @@ We built CollectFolio because we had this exact problem across Pokemon, LEGO, wa
 
 If you are tracking fewer than 10 cards, a spreadsheet is fine. Past 10 cards, the math gets painful. Past 50 cards, you need a real tool.
 
-Join the [waitlist](/#waitlist) for early access.
+See how the planned [Pokemon card collection tracker](/pokemon-tracker) handles graded, raw, and sealed inventory, or join the [waitlist](/#waitlist) for early access.

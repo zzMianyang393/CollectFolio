@@ -2,6 +2,10 @@
 
 CollectFolio uses a layered analytics stack. All components are free, privacy-respecting, and have zero impact on SEO.
 
+Production site: `https://collectfolio.pages.dev`
+
+Cloudflare Pages request analytics and D1 waitlist attribution are available after deployment. Google Search Console remains the source of truth for organic query impressions and clicks and requires property ownership verification by the site owner.
+
 ## Cloudflare Web Analytics (primary)
 
 **What it gives you:** page views, unique visitors, top pages, top referrers, countries (geo distribution), browsers, devices.

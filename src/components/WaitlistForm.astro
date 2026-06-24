@@ -29,6 +29,16 @@ const {
     class="flex-1 rounded-md border border-border bg-bg px-4 py-3 outline-none transition-colors placeholder:text-fg-muted focus:border-accent"
   />
   <input type="hidden" name="source" value={source} />
+  <div class="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
+    <label for={`website-${source}`}>Website</label>
+    <input
+      id={`website-${source}`}
+      type="text"
+      name="website"
+      tabindex="-1"
+      autocomplete="off"
+    />
+  </div>
   <button
     type="submit"
     class="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-6 py-3 font-semibold text-accent-fg transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
@@ -51,6 +61,7 @@ const {
       const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
       const label = form.querySelector<HTMLElement>('[data-label]');
       const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+      const website = (form.elements.namedItem('website') as HTMLInputElement | null)?.value ?? '';
       const source = form.dataset.source ?? 'unknown';
 
       if (!email) return;
@@ -63,15 +74,24 @@ const {
         const res = await fetch('/api/waitlist', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, source }),
+          body: JSON.stringify({
+            email,
+            source,
+            website,
+            landingPath: `${window.location.pathname}${window.location.search}`,
+            referrer: document.referrer,
+          }),
         });
 
         if (!res.ok) throw new Error('Network response was not ok');
 
         if (status) {
-          status.textContent = 'Thanks! Check your inbox to confirm.';
+          status.textContent = "Thanks! You're on the CollectFolio waitlist.";
           status.className = 'mt-3 block text-center text-sm text-accent';
         }
+        window.dispatchEvent(new CustomEvent('collectfolio:waitlist-signup', {
+          detail: { source, path: window.location.pathname },
+        }));
         form.reset();
       } catch (err) {
         if (status) {

@@ -15,7 +15,7 @@ const { items, heading = 'Frequently asked questions', id = 'faq' } = Astro.prop
 <section id={id} class="mx-auto max-w-3xl px-6 py-16">
   <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">{heading}</h2>
   <dl class="mt-10 space-y-2">
-    {items.map((item, i) => (
+    {items.map((item) => (
       <details class="group rounded-lg border border-border bg-bg-elevated open:bg-bg-elevated/50">
         <summary class="flex cursor-pointer items-center justify-between gap-4 p-5 font-semibold transition-colors hover:text-accent">
           <span>{item.q}</span>

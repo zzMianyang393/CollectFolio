@@ -2,6 +2,17 @@
 
 Step-by-step deploy to Cloudflare Pages with all integrations.
 
+## Current production resources
+
+- Pages project: `collectfolio`
+- Production URL: `https://collectfolio.pages.dev`
+- Production branch: `main`
+- D1 database: `collectfolio-waitlist`
+- D1 binding: `DB`
+- Configuration source: `wrangler.jsonc`
+
+Cloudflare Pages is connected to `zzMianyang393/CollectFolio`. A push to `main` triggers the production build and deployment. Apply both SQL files in `migrations/` when creating a replacement database.
+
 ## Prerequisites
 
 - GitHub account (push this repo)

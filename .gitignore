@@ -23,6 +23,8 @@ yarn-error.log*
 
 # cloudflare
 .wrangler/
+.wrangler-config/
+.wrangler-build/
 .dev.vars
 
 # os
