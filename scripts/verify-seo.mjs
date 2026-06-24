@@ -59,7 +59,8 @@ for (const [route, file] of routeFiles) {
 
   if (!title) failures.push(`${route}: missing title`);
   if (!description) failures.push(`${route}: missing description`);
-  if (!canonical?.startsWith(productionOrigin)) failures.push(`${route}: invalid canonical`);
+  const expectedCanonical = route === '/' ? `${productionOrigin}/` : `${productionOrigin}${route}/`;
+  if (canonical !== expectedCanonical) failures.push(`${route}: canonical must be ${expectedCanonical}`);
   if (!ogImage?.startsWith(productionOrigin)) failures.push(`${route}: og:image must be absolute`);
   if (h1Count !== 1) failures.push(`${route}: expected one h1, found ${h1Count}`);
 
@@ -78,7 +79,7 @@ if (!sitemapIndex.includes(`${productionOrigin}/sitemap-0.xml`)) failures.push('
 
 const sitemap = readFileSync(join(root, 'sitemap-0.xml'), 'utf8');
 for (const route of requiredRoutes) {
-  const expected = route === '/' ? productionOrigin : `${productionOrigin}${route}`;
+  const expected = route === '/' ? `${productionOrigin}/` : `${productionOrigin}${route}/`;
   if (!sitemap.includes(`<loc>${expected}</loc>`)) failures.push(`sitemap: missing ${route}`);
 }
 
