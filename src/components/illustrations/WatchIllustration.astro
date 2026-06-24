@@ -4,89 +4,12 @@ interface Props {
 }
 const { class: className = '' } = Astro.props;
 ---
-<svg
-  viewBox="0 0 200 280"
-  xmlns="http://www.w3.org/2000/svg"
+<img
+  src="/illustrations/watch_illustration.png"
+  alt="Premium chronograph watch"
   class={className}
-  role="img"
-  aria-label="Watch illustration"
->
-  <!-- Strap top -->
-  <path d="M 70 0 L 130 0 L 130 60 Q 130 68 122 72 L 78 72 Q 70 68 70 60 Z"
-        class="fill-fg-muted/30 stroke-border" stroke-width="1"/>
-  <!-- Strap bottom -->
-  <path d="M 70 280 L 130 280 L 130 220 Q 130 212 122 208 L 78 208 Q 70 212 70 220 Z"
-        class="fill-fg-muted/30 stroke-border" stroke-width="1"/>
-  <!-- Strap stitching -->
-  <line x1="78" y1="10" x2="78" y2="60" class="stroke-fg-muted/50" stroke-width="0.5" stroke-dasharray="2,2"/>
-  <line x1="122" y1="10" x2="122" y2="60" class="stroke-fg-muted/50" stroke-width="0.5" stroke-dasharray="2,2"/>
-  <line x1="78" y1="220" x2="78" y2="270" class="stroke-fg-muted/50" stroke-width="0.5" stroke-dasharray="2,2"/>
-  <line x1="122" y1="220" x2="122" y2="270" class="stroke-fg-muted/50" stroke-width="0.5" stroke-dasharray="2,2"/>
-
-  <!-- Lugs -->
-  <path d="M 68 72 L 56 92 L 72 90 Z" class="fill-fg-muted/40"/>
-  <path d="M 132 72 L 144 92 L 128 90 Z" class="fill-fg-muted/40"/>
-  <path d="M 68 208 L 56 188 L 72 190 Z" class="fill-fg-muted/40"/>
-  <path d="M 132 208 L 144 188 L 128 190 Z" class="fill-fg-muted/40"/>
-
-  <!-- Case -->
-  <circle cx="100" cy="140" r="70" class="fill-bg-elevated stroke-border" stroke-width="2"/>
-  <!-- Bezel ring -->
-  <circle cx="100" cy="140" r="65" class="fill-none stroke-fg-muted/40" stroke-width="1"/>
-  <!-- Bezel notches -->
-  <g class="stroke-fg-muted/50" stroke-width="1">
-    <line x1="100" y1="76" x2="100" y2="82"/>
-    <line x1="100" y1="198" x2="100" y2="204"/>
-    <line x1="36" y1="140" x2="42" y2="140"/>
-    <line x1="158" y1="140" x2="164" y2="140"/>
-  </g>
-
-  <!-- Dial -->
-  <circle cx="100" cy="140" r="58" class="fill-bg"/>
-
-  <!-- Major hour markers -->
-  <g class="fill-fg">
-    <rect x="97" y="87" width="6" height="10" rx="1"/>
-    <rect x="97" y="183" width="6" height="10" rx="1"/>
-    <rect x="148" y="137" width="10" height="6" rx="1"/>
-    <rect x="42" y="137" width="10" height="6" rx="1"/>
-  </g>
-
-  <!-- Minor hour markers -->
-  <g class="fill-fg-muted">
-    <circle cx="130" cy="93" r="1.8"/>
-    <circle cx="147" cy="110" r="1.8"/>
-    <circle cx="147" cy="170" r="1.8"/>
-    <circle cx="130" cy="187" r="1.8"/>
-    <circle cx="70" cy="187" r="1.8"/>
-    <circle cx="53" cy="170" r="1.8"/>
-    <circle cx="53" cy="110" r="1.8"/>
-    <circle cx="70" cy="93" r="1.8"/>
-  </g>
-
-  <!-- Brand text -->
-  <text x="100" y="116" text-anchor="middle" font-size="6" font-weight="700" class="fill-fg" font-family="serif" letter-spacing="1.2">COLLECTFOLIO</text>
-  <text x="100" y="125" text-anchor="middle" font-size="3.5" class="fill-fg-muted" letter-spacing="0.5">SWISS INSPIRED</text>
-
-  <!-- Date window -->
-  <rect x="135" y="135" width="14" height="10" class="fill-bg stroke-fg" stroke-width="0.6"/>
-  <text x="142" y="143" text-anchor="middle" font-size="6" class="fill-fg" font-family="ui-monospace, monospace" font-weight="600">28</text>
-
-  <!-- Hands -->
-  <line x1="100" y1="140" x2="100" y2="100" class="stroke-fg" stroke-width="3" stroke-linecap="round"/>
-  <line x1="100" y1="140" x2="135" y2="125" class="stroke-fg" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="100" y1="140" x2="100" y2="158" class="stroke-accent" stroke-width="1.5" stroke-linecap="round"/>
-
-  <!-- Center cap -->
-  <circle cx="100" cy="140" r="3.5" class="fill-fg"/>
-  <circle cx="100" cy="140" r="1.2" class="fill-accent"/>
-
-  <!-- Crown -->
-  <rect x="170" y="135" width="9" height="10" rx="1" class="fill-fg-muted/40 stroke-border" stroke-width="0.5"/>
-  <line x1="172.5" y1="135" x2="172.5" y2="145" class="stroke-fg-muted" stroke-width="0.5"/>
-  <line x1="175" y1="135" x2="175" y2="145" class="stroke-fg-muted" stroke-width="0.5"/>
-  <line x1="177.5" y1="135" x2="177.5" y2="145" class="stroke-fg-muted" stroke-width="0.5"/>
-
-  <!-- Subtle highlight on case -->
-  <path d="M 40 110 Q 60 70 100 70" class="fill-none stroke-fg/10" stroke-width="2" stroke-linecap="round"/>
-</svg>
+  width="200"
+  height="280"
+  loading="lazy"
+  decoding="async"
+/>

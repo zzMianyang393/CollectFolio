@@ -4,63 +4,12 @@ interface Props {
 }
 const { class: className = '' } = Astro.props;
 ---
-<svg
-  viewBox="0 0 240 200"
-  xmlns="http://www.w3.org/2000/svg"
+<img
+  src="/illustrations/lego_illustration.png"
+  alt="Lego brick and minifigure"
   class={className}
-  role="img"
-  aria-label="LEGO brick"
->
-  <!-- Base shadow -->
-  <ellipse cx="120" cy="180" rx="100" ry="6" class="fill-fg/10"/>
-
-  <!-- Brick body (2x4 brick, side view with studs on top) -->
-  <!-- Main body -->
-  <rect x="30" y="80" width="180" height="90" rx="3" class="fill-accent"/>
-  <rect x="30" y="80" width="180" height="90" rx="3" class="fill-none stroke-fg/40" stroke-width="2"/>
-
-  <!-- Top edge highlight -->
-  <rect x="32" y="82" width="176" height="3" class="fill-fg/15"/>
-
-  <!-- Side grooves (between studs from top) -->
-  <g class="fill-fg/30">
-    <rect x="73" y="80" width="3" height="6"/>
-    <rect x="117" y="80" width="3" height="6"/>
-    <rect x="161" y="80" width="3" height="6"/>
-  </g>
-
-  <!-- Studs (4 visible on top of 2x4) -->
-  <!-- Stud 1 -->
-  <ellipse cx="55" cy="78" rx="18" ry="7" class="fill-accent"/>
-  <ellipse cx="55" cy="78" rx="18" ry="7" class="fill-none stroke-fg/40" stroke-width="1.5"/>
-  <ellipse cx="55" cy="76" rx="11" ry="4" class="fill-fg/15"/>
-  <ellipse cx="55" cy="80" rx="14" ry="2" class="fill-fg/10"/>
-
-  <!-- Stud 2 -->
-  <ellipse cx="105" cy="78" rx="18" ry="7" class="fill-accent"/>
-  <ellipse cx="105" cy="78" rx="18" ry="7" class="fill-none stroke-fg/40" stroke-width="1.5"/>
-  <ellipse cx="105" cy="76" rx="11" ry="4" class="fill-fg/15"/>
-  <ellipse cx="105" cy="80" rx="14" ry="2" class="fill-fg/10"/>
-
-  <!-- Stud 3 -->
-  <ellipse cx="155" cy="78" rx="18" ry="7" class="fill-accent"/>
-  <ellipse cx="155" cy="78" rx="18" ry="7" class="fill-none stroke-fg/40" stroke-width="1.5"/>
-  <ellipse cx="155" cy="76" rx="11" ry="4" class="fill-fg/15"/>
-  <ellipse cx="155" cy="80" rx="14" ry="2" class="fill-fg/10"/>
-
-  <!-- Stud 4 -->
-  <ellipse cx="200" cy="78" rx="14" ry="5.5" class="fill-accent"/>
-  <ellipse cx="200" cy="78" rx="14" ry="5.5" class="fill-none stroke-fg/40" stroke-width="1.5"/>
-
-  <!-- LEGO text on side -->
-  <text x="120" y="135" text-anchor="middle" font-size="14" class="fill-fg/60" font-weight="900" letter-spacing="3" font-family="ui-sans-serif, sans-serif">LEGO</text>
-
-  <!-- Bottom edge -->
-  <rect x="32" y="166" width="176" height="3" class="fill-fg/20"/>
-
-  <!-- Side highlight -->
-  <rect x="32" y="84" width="2" height="82" class="fill-fg/15"/>
-
-  <!-- Bottom row studs peeking -->
-  <rect x="35" y="170" width="170" height="6" class="fill-fg/15"/>
-</svg>
+  width="240"
+  height="200"
+  loading="lazy"
+  decoding="async"
+/>

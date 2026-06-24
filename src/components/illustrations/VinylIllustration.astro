@@ -4,55 +4,12 @@ interface Props {
 }
 const { class: className = '' } = Astro.props;
 ---
-<svg
-  viewBox="0 0 240 240"
-  xmlns="http://www.w3.org/2000/svg"
+<img
+  src="/illustrations/vinyl_illustration.png"
+  alt="Vinyl record"
   class={className}
-  role="img"
-  aria-label="Vinyl record"
->
-  <!-- Outer disc -->
-  <circle cx="120" cy="120" r="116" class="fill-fg"/>
-  <circle cx="120" cy="120" r="116" class="fill-none stroke-border" stroke-width="1"/>
-
-  <!-- Grooves (concentric circles, alternating subtle) -->
-  <g fill="none" stroke="bg/8" stroke-width="0.4">
-    <circle cx="120" cy="120" r="108"/>
-    <circle cx="120" cy="120" r="104"/>
-    <circle cx="120" cy="120" r="100"/>
-    <circle cx="120" cy="120" r="96"/>
-    <circle cx="120" cy="120" r="92"/>
-    <circle cx="120" cy="120" r="88"/>
-    <circle cx="120" cy="120" r="84"/>
-    <circle cx="120" cy="120" r="80"/>
-    <circle cx="120" cy="120" r="76"/>
-    <circle cx="120" cy="120" r="72"/>
-    <circle cx="120" cy="120" r="68"/>
-    <circle cx="120" cy="120" r="64"/>
-    <circle cx="120" cy="120" r="60"/>
-    <circle cx="120" cy="120" r="56"/>
-    <circle cx="120" cy="120" r="52"/>
-  </g>
-
-  <!-- Specular highlight (light reflection) -->
-  <path d="M 60 60 Q 100 40 150 50 Q 130 55 100 70 Q 75 80 60 100 Q 50 80 60 60 Z"
-        class="fill-fg/15"/>
-
-  <!-- Label -->
-  <circle cx="120" cy="120" r="42" class="fill-accent"/>
-  <circle cx="120" cy="120" r="42" class="fill-none stroke-fg" stroke-width="1"/>
-  <circle cx="120" cy="120" r="38" class="fill-none stroke-fg/30" stroke-width="0.5"/>
-
-  <!-- Label text -->
-  <text x="120" y="100" text-anchor="middle" font-size="6" class="fill-fg" font-weight="700" letter-spacing="2">COLLECTFOLIO RECORDS</text>
-  <text x="120" y="120" text-anchor="middle" font-size="5" class="fill-fg/80">SIDE A</text>
-  <text x="120" y="135" text-anchor="middle" font-size="11" class="fill-fg" font-weight="900" letter-spacing="1">33⅓ RPM</text>
-  <text x="120" y="148" text-anchor="middle" font-size="4" class="fill-fg/80" letter-spacing="0.5">STEREO · 180g</text>
-
-  <!-- Center hole -->
-  <circle cx="120" cy="120" r="3.5" class="fill-bg"/>
-  <circle cx="120" cy="120" r="3.5" class="fill-none stroke-fg" stroke-width="0.5"/>
-
-  <!-- Edge highlight -->
-  <circle cx="120" cy="120" r="115.5" class="fill-none stroke-fg/40" stroke-width="0.3"/>
-</svg>
+  width="240"
+  height="240"
+  loading="lazy"
+  decoding="async"
+/>
