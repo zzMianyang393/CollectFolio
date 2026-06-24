@@ -1,114 +1,114 @@
-# CollectFolio SEO Smoke Test and Cloudflare Deployment Design
+# CollectFolio 自然搜索验证与 Cloudflare 部署设计
 
-## Objective
+## 目标
 
-Deploy CollectFolio as an organic-search demand test. The site will measure search impressions, clicks, landing-page traffic, and email signups before the full product is built. Paid traffic is explicitly out of scope.
+将 CollectFolio 部署为一个自然搜索需求验证站。在正式产品开发前，通过该站收集搜索曝光、自然点击、落地页访问和邮箱注册数据。本阶段明确不使用付费流量。
 
-## Product Boundary
+## 产品边界
 
-This phase is a marketing and validation site, not the production application. Cloudflare Pages will host the static Astro site, a Pages Function will accept waitlist submissions, and D1 will store signups. A later product may run on a conventional server and may obtain valuation data through public APIs or compliant crawlers.
+当前阶段是营销和需求验证网站，不是正式产品。Astro 静态站部署在 Cloudflare Pages；Pages Function 接收候补名单请求；D1 保存邮箱注册。后续正式产品可以迁移到普通服务器，并通过公开 API 或合规爬虫获取估值数据。
 
-The site may describe planned capabilities, but copy must not imply that unavailable live data or generated reports already exist. Calls to action will consistently describe a waitlist or upcoming beta.
+页面可以描述计划中的产品能力，但不能让用户误以为实时估值、保险报告或完整产品已经上线。所有行动按钮统一表达为加入候补名单或等待 Beta 开放。
 
-## SEO Strategy
+## SEO 策略
 
-### Existing commercial-intent clusters
+### 已有商业意图关键词簇
 
-- Pokemon card collection tracker and portfolio tracker
-- LEGO collection value and investment tracker
-- Watch collection tracker and portfolio manager
-- Vinyl collection value and tracker
-- Collectibles insurance inventory and valuation report
-- Cross-category collectibles portfolio tracker
+- Pokemon 卡牌收藏追踪器与投资组合追踪器
+- LEGO 收藏价值与投资追踪器
+- 手表收藏追踪器与投资组合管理器
+- 黑胶唱片收藏价值与追踪器
+- 收藏品保险清单与估值报告
+- 跨品类收藏品投资组合追踪器
 
-### Expansion approach
+### 关键词扩充方案
 
-Add a small number of substantial pages rather than programmatically generating thin pages. Each new page must target a distinct intent, answer the query without requiring signup, link to a relevant commercial landing page, and offer the waitlist as a secondary conversion.
+新增少量内容扎实的页面，不批量生成低质量薄页面。每个新页面必须对应独立的搜索意图，在不注册的情况下也能回答用户问题，并通过正文内链指向相关商业落地页；候补名单作为次要转化目标。
 
-Initial supporting topics:
+第一批支撑内容：
 
-1. Pokemon card collection value tracker and spreadsheet workflow
-2. LEGO collection value tracker and investment ROI workflow
-3. Watch collection inventory and valuation workflow
-4. Vinyl collection value using Discogs and sold-market data
-5. Collectibles insurance inventory template and documentation checklist
-6. How to track a mixed collectibles portfolio
+1. Pokemon 卡牌收藏价值追踪与表格管理流程
+2. LEGO 收藏价值追踪与投资回报率计算流程
+3. 手表收藏清单与估值管理流程
+4. 使用 Discogs 和成交市场数据计算黑胶收藏价值
+5. 收藏品保险清单模板与资料准备检查表
+6. 如何管理跨品类收藏品投资组合
 
-The existing Pokemon guide may be revised to avoid overlapping the Pokemon landing page. New content will use descriptive titles, unique metadata, article schema, contextual internal links, and visible update dates.
+现有 Pokemon 指南会根据需要调整，避免与 Pokemon 商业落地页争夺相同关键词。新增内容均包含独立标题、描述、文章结构化数据、正文内链和可见的更新时间。
 
-### Technical SEO
+### 技术 SEO
 
-- One canonical URL per page
-- Absolute Open Graph and canonical URLs
-- XML sitemap and RSS output verified after build
-- Robots file points to the deployed sitemap
-- Unique title, description, H1, and search intent for every indexable page
-- Breadcrumb or contextual navigation from articles to their commercial cluster
-- No fabricated ratings, usage counts, or testimonials
-- Structured data limited to content visible on the page
-- Independent production domain configuration via a single site URL value
+- 每个页面只有一个规范链接（canonical）
+- Open Graph 图片地址和规范链接使用绝对 URL
+- 构建后验证 XML Sitemap 和 RSS
+- `robots.txt` 指向线上 Sitemap
+- 每个可索引页面拥有唯一的标题、描述、H1 和搜索意图
+- 文章通过面包屑或正文链接连接到对应商业页面
+- 不编造评分、用户数量、客户评价或使用数据
+- 结构化数据必须与页面上可见内容一致
+- 生产域名通过一个统一站点 URL 配置
 
-Because the Cloudflare account has no active zones, the initial canonical host will be `https://collectfolio.pages.dev`. A future custom-domain migration must update the Astro site setting, robots sitemap URL, analytics properties, and redirects together.
+当前 Cloudflare 账户没有活跃域名，因此首个规范地址使用 `https://collectfolio.pages.dev`。未来迁移到独立域名时，必须同时更新 Astro 站点配置、robots Sitemap 地址、分析平台属性和跳转规则。
 
-## Measurement Design
+## 数据采集设计
 
-Google Search Console will be the source of truth for organic queries, impressions, clicks, position, and CTR. Cloudflare Web Analytics will measure page traffic. D1 will measure waitlist conversions.
+Google Search Console 是自然搜索查询、曝光、点击、排名和点击率的最终数据来源。Cloudflare Web Analytics 用于统计页面访问。D1 用于统计候补名单转化。
 
-Each signup will store:
+每次注册保存：
 
-- normalized email
-- page-defined content source
-- landing path
-- referrer when available
-- UTM source, medium, and campaign when present
-- creation timestamp
-- user agent
+- 标准化后的邮箱
+- 页面预设的内容来源
+- 落地页路径
+- 可获得时的来源页面
+- 存在时的 UTM source、medium 和 campaign
+- 创建时间
+- User-Agent
 
-The form will emit a browser event after a confirmed API success so an analytics provider can record the conversion later. The success message must not claim that a confirmation email was sent unless email delivery is configured and succeeds.
+浏览器只有在 API 确认成功后才触发注册成功事件，方便后续分析工具记录转化。如果没有配置邮件发送，或者邮件发送失败，页面不能提示“确认邮件已发送”。
 
-Spam controls will include an actual honeypot field, request validation, same-origin enforcement, and duplicate-email handling. Turnstile is optional and will only be added if spam appears, to avoid unnecessary friction during the initial test.
+垃圾注册防护包括真实蜜罐字段、请求校验、同源限制和重复邮箱幂等处理。初期不强制加入 Turnstile，避免增加注册摩擦；只有出现明显垃圾注册后再启用。
 
-## Cloudflare Architecture
+## Cloudflare 架构
 
-- Cloudflare Pages project: `collectfolio`
-- Production URL: `https://collectfolio.pages.dev`
-- Build command: `npm run build`
-- Output directory: `dist`
-- Pages Function route: `/api/waitlist`
-- D1 database: `collectfolio-waitlist`
-- D1 binding: `DB`
-- Production allowed origin: `https://collectfolio.pages.dev`
+- Cloudflare Pages 项目：`collectfolio`
+- 生产地址：`https://collectfolio.pages.dev`
+- 构建命令：`npm run build`
+- 输出目录：`dist`
+- Pages Function 路由：`/api/waitlist`
+- D1 数据库：`collectfolio-waitlist`
+- D1 绑定名称：`DB`
+- 生产允许来源：`https://collectfolio.pages.dev`
 
-Deployment may use Wrangler for the static asset and Functions bundle while the Cloudflare API plugin creates or inspects account resources. No source repository integration is required for the first release.
+Cloudflare API 插件负责创建和检查账户资源；Wrangler 可负责上传静态资源及 Functions。第一次发布不要求连接 Git 仓库。
 
-## Error Handling
+## 错误处理
 
-- Invalid signup payloads return 400 without storing data.
-- Cross-origin requests return 403.
-- Duplicate signups return a successful idempotent response.
-- D1 failures return 500 and do not display a false success state.
-- Optional email-delivery failure does not remove a successfully stored signup, but the UI only reports waitlist success.
-- Pages missing required metadata or canonical URLs fail local SEO verification before deployment.
+- 无效注册请求返回 400，不保存数据
+- 非允许来源请求返回 403
+- 重复注册返回成功，保证接口幂等
+- D1 写入失败返回 500，前端不能显示虚假成功
+- 可选邮件发送失败不删除已经成功保存的注册，但界面只提示候补名单注册成功
+- 如果页面缺少必要元数据或规范链接，本地 SEO 验证必须失败并阻止部署
 
-## Verification
+## 验证方案
 
-Before deployment:
+部署前：
 
-- `npm run check` passes without errors.
-- `npm run build` succeeds.
-- Automated checks verify titles, descriptions, canonicals, one H1, sitemap inclusion, robots sitemap URL, and internal-link validity for generated HTML.
-- Waitlist handler tests cover valid, invalid, duplicate, forbidden-origin, honeypot, and D1-failure cases.
+- `npm run check` 无错误通过
+- `npm run build` 成功
+- 自动检查生成页面的标题、描述、canonical、唯一 H1、Sitemap 收录和内部链接有效性
+- 候补名单接口测试覆盖正常请求、无效请求、重复邮箱、非法来源、蜜罐命中和 D1 失败
 
-After deployment:
+部署后：
 
-- Homepage and all SEO pages return 200 over HTTPS.
-- `robots.txt`, `sitemap-index.xml`, sitemap contents, and `rss.xml` return valid content.
-- `/api/waitlist` rejects GET and accepts a controlled test signup.
-- The D1 test row is verified without exposing email addresses publicly.
-- Canonicals, Open Graph URLs, and form requests use the production host.
-- Cloudflare deployment status is successful.
+- 首页及所有 SEO 页面通过 HTTPS 返回 200
+- `robots.txt`、`sitemap-index.xml`、Sitemap 内容和 `rss.xml` 均可正常访问
+- `/api/waitlist` 拒绝 GET，并能接受一次受控测试注册
+- 在不公开邮箱的前提下确认 D1 测试数据已经写入
+- canonical、Open Graph URL 和表单请求均使用生产地址
+- Cloudflare 部署状态成功
 
-## Completion Criteria
+## 完成标准
 
-The smoke-test site is complete when the expanded pages are deployed, technical checks pass, the production Pages URL is reachable, the waitlist persists submissions to D1, and the user has the exact URLs and remaining manual steps for Google Search Console verification and sitemap submission.
+扩充后的页面已经上线，所有技术检查通过，Cloudflare Pages 生产地址可访问，候补名单可以写入 D1，并向用户交付准确的线上地址，以及 Google Search Console 验证和提交 Sitemap 所需的剩余人工步骤。
 
