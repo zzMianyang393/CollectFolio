@@ -3,6 +3,10 @@
   "name": "collectfolio",
   "compatibility_date": "2026-06-24",
   "pages_build_output_dir": "./dist",
+  "vars": {
+    "ALLOWED_ORIGIN": "https://collectfolio.pages.dev",
+    "PUBLIC_GSC_VERIFICATION": "y2TUdVHIyAygqMl5aRwpsEsjbNpFe7rubts6t9B6vvQ"
+  },
   "d1_databases": [
     {
       "binding": "DB",
