@@ -13,6 +13,8 @@ Step-by-step deploy to Cloudflare Pages with all integrations.
 
 Cloudflare Pages is connected to `zzMianyang393/CollectFolio`. A push to `main` triggers the production build and deployment. Apply both SQL files in `migrations/` when creating a replacement database.
 
+The Git integration watches `*` so every change pushed to `main` can trigger a production deployment; preview branch deployments are disabled for this smoke-test project.
+
 ## Prerequisites
 
 - GitHub account (push this repo)
