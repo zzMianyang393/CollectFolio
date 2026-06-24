@@ -5,7 +5,8 @@
   "pages_build_output_dir": "./dist",
   "vars": {
     "ALLOWED_ORIGIN": "https://collectfolio.pages.dev",
-    "PUBLIC_GSC_VERIFICATION": "y2TUdVHIyAygqMl5aRwpsEsjbNpFe7rubts6t9B6vvQ"
+    "PUBLIC_GSC_VERIFICATION": "y2TUdVHIyAygqMl5aRwpsEsjbNpFe7rubts6t9B6vvQ",
+    "PUBLIC_CF_ANALYTICS_TOKEN": "4decba4cadf9430d94c81fbcfb73240f"
   },
   "d1_databases": [
     {
