@@ -82,6 +82,11 @@ const allJsonLd = jsonLd
       <meta name="google-site-verification" content={import.meta.env.PUBLIC_GSC_VERIFICATION} />
     )}
 
+    <!-- Bing Webmaster Tools verification (set PUBLIC_BING_VERIFICATION env var) -->
+    {import.meta.env.PUBLIC_BING_VERIFICATION && (
+      <meta name="msvalidate.01" content={import.meta.env.PUBLIC_BING_VERIFICATION} />
+    )}
+
     <!-- JSON-LD -->
     {allJsonLd.map((schema) => (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
